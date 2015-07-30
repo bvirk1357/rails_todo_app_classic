@@ -33,6 +33,12 @@ class TasksController < ApplicationController
     render 'home/index'
   end
 
+  def delete_completed
+    @tasks = Task.where(completed: true)
+    @tasks.destroy_all
+    redirect_to root_path
+  end
+
   def edit
 
   end
