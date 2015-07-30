@@ -1,0 +1,19 @@
+<h1>Todo list</h1>
+
+<%= form_for :task, url: tasks_path do |f|%>
+  <%= f.text_field :description, placeholder: 'What needs to be done?' %>
+  <%= f.submit 'Add task' %>
+<% end %>
+
+<table>
+  <% @tasks.each do |task| %>
+    <tr>
+    <% if task.completed %>
+      <td class="completed"><%= task.description %></td>
+    <% else %>
+      <td><%= task.description %></td>
+    <% end %>
+    <td><%= button_to 'Complete', task_complete_path(task), method: :post %></td>
+  </tr>
+  <% end %>
+</table>
