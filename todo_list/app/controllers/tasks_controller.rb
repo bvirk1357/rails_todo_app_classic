@@ -3,7 +3,9 @@ class TasksController < ApplicationController
   end
 
   def create
-    @task = Task.create(description: params[:task][:description])
+    @task = Task.create(
+      description: params[:task][:description],
+      completed: false)
 
     redirect_to root_path
   end
@@ -21,6 +23,24 @@ class TasksController < ApplicationController
     redirect_to root_path
   end
 
+  def completed
+    @tasks = Task.where(completed: true)
+    render 'home/index'
+  end
+
+  def incomplete
+    @tasks = Task.where(completed: false)
+    render 'home/index'
+  end
+
+  def edit
+
+  end
+
   def update
+    @task = Task.find(params[:id])
+    @task.description = params[:task][:description]
+    @task.save
+    redirect_to root_path
   end
 end

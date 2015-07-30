@@ -8,13 +8,15 @@
 <table>
   <% @tasks.each do |task| %>
     <tr>
-    <% if task.completed %>
-      <td class="completed"><%= task.description %></td>
-    <% else %>
-      <td><%= task.description %></td>
-    <% end %>
-    <td><%= button_to 'Complete', task_complete_path(task), method: :post %></td>
-    <td><%= button_to 'Delete', task_path(task), method: :delete %></td>
+      <td>
+        <%= render partial: 'task/description', layout: false, locals:{task: task}  %>
+      </td>
+      <td><%= button_to 'Complete', task_complete_path(task), method: :post %></td>
+      <td><%= button_to 'Delete', task_path(task), method: :delete %></td>
   </tr>
   <% end %>
 </table>
+
+<%= button_to 'All', root_path, method: :get%>
+<%= button_to 'Completed', show_completed_path, method: :get%>
+<%= button_to 'Incomplete', show_incomplete_path, method: :get%>
